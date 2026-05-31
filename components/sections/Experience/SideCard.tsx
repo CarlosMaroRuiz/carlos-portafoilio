@@ -1,4 +1,9 @@
-import type { SideCardProps } from "./types";
+import { ReactNode } from "react";
+
+export interface SideCardProps {
+  title: string;
+  children: ReactNode;
+}
 
 export function SideCard({ title, children }: SideCardProps) {
   return (

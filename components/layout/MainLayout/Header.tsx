@@ -1,43 +1,63 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useLang } from "@/context/LangContext";
 import { motion, AnimatePresence } from "framer-motion";
+import { useActiveSection } from "@/hooks/useActiveSection";
 
 export const Header = () => {
   const { t, lang, toggle } = useLang();
   const [isOpen, setIsOpen] = useState(false);
 
+  const sectionIds = useMemo(() => ["home", "about", "resume", "portfolio"], []);
+  const active = useActiveSection(sectionIds);
+
   const navLinks = [
-    { href: "#home", label: t.nav.home },
-    { href: "#about", label: t.nav.about },
-    { href: "#resume", label: t.nav.resume },
-    { href: "#portfolio", label: t.nav.portfolio },
+    { href: "#home", label: t.nav.home, id: "home" },
+    { href: "#about", label: t.nav.about, id: "about" },
+    { href: "#resume", label: t.nav.resume, id: "resume" },
+    { href: "#portfolio", label: t.nav.portfolio, id: "portfolio" },
   ];
 
   return (
     <header className="w-full fixed top-0 z-50 bg-black/80 backdrop-blur-sm border-b border-white/5">
       <div className="px-8 py-6 flex justify-between items-center text-sm tracking-wide">
-        
-        {/* Desktop Navigation */}
+
+        <Link
+          href="#home"
+          className="text-white font-bold tracking-widest uppercase text-xs hover:text-accent transition-colors"
+        >
+          Carlos Mario
+        </Link>
+
         <nav className="hidden md:block">
-          <ul className="flex space-x-8 text-muted font-medium items-center">
+          <ul className="flex space-x-8 font-medium items-center">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <Link 
-                  href={link.href} 
-                  className="hover:text-white transition-colors"
+                <Link
+                  href={link.href}
+                  className={`relative transition-colors pb-1 ${
+                    active === link.id
+                      ? "text-white"
+                      : "text-muted hover:text-white"
+                  }`}
                 >
                   {link.label}
+                  {active === link.id && (
+                    <motion.span
+                      layoutId="nav-underline"
+                      className="absolute -bottom-1 left-0 right-0 h-px bg-accent"
+                      transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                    />
+                  )}
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* Mobile Hamburger Button */}
-        <button 
+        <button
           className="md:hidden text-white p-2 -ml-2"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
@@ -50,8 +70,7 @@ export const Header = () => {
             )}
           </svg>
         </button>
-        
-        {/* Language Toggle (Always visible on the right) */}
+
         <div className="flex items-center">
           <button
             onClick={toggle}
@@ -68,7 +87,6 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.nav
@@ -78,12 +96,14 @@ export const Header = () => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="md:hidden border-t border-white/5 bg-black/95 overflow-hidden"
           >
-            <ul className="flex flex-col px-8 py-4 space-y-4 text-muted font-medium">
+            <ul className="flex flex-col px-8 py-4 space-y-4 font-medium">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link 
-                    href={link.href} 
-                    className="block hover:text-white transition-colors"
+                  <Link
+                    href={link.href}
+                    className={`block transition-colors ${
+                      active === link.id ? "text-white" : "text-muted hover:text-white"
+                    }`}
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}

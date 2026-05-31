@@ -1,11 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { about } from "./data";
 import { useLang } from "@/context/LangContext";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { AboutData } from "@/core/models/portfolio";
 
-export default function About() {
+export interface AboutProps {
+  data: AboutData;
+}
+
+export default function About({ data: about }: AboutProps) {
   const { t } = useLang();
 
   return (
@@ -51,20 +55,23 @@ export default function About() {
         </ScrollReveal>
       </div>
 
-      {/* Desktop Image */}
       <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:flex justify-end items-center pointer-events-none pr-8 md:pr-24">
         <ScrollReveal direction="left" delay={0.4}>
-          <div className="relative w-[350px] xl:w-[450px] h-[500px] xl:h-[600px] rounded-sm overflow-hidden border border-white/5 grayscale hover:grayscale-0 transition-all duration-700 opacity-60 hover:opacity-100 mix-blend-luminosity hover:mix-blend-normal cursor-auto pointer-events-auto">
-            <Image
-              src="/me.jpg"
-              alt="Carlos Mario Ruiz Pinacho"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1200px) 50vw, 33vw"
-            />
-            {/* Elegant overlay gradient to blend with background */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-black opacity-80" />
+          <div className="relative group pointer-events-auto">
+            <div className="relative w-[350px] xl:w-[450px] h-[500px] xl:h-[600px] rounded-sm overflow-hidden border border-white/5 group-hover:border-accent/40 transition-all duration-700 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 mix-blend-luminosity hover:mix-blend-normal cursor-auto">
+              <Image
+                src="/me.jpg"
+                alt="Carlos Mario Ruiz Pinacho"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1200px) 50vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-black opacity-80" />
+            </div>
+            <span className="absolute -bottom-6 left-0 right-0 text-center text-[10px] text-white/20 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              hover
+            </span>
           </div>
         </ScrollReveal>
       </div>

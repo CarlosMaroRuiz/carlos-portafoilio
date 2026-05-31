@@ -14,7 +14,7 @@ export const en: Translation = {
   },
   about: {
     title: "About",
-    bio: `Frontend Developer with over 2 years of experience building web applications.
+    bio: `Frontend Developer building web applications.
 Proven track record delivering responsive interfaces using React.js, TypeScript, Tailwind CSS, and modern UI component libraries.
 I have worked integrating REST APIs, AI services, and Web3 technologies. AWS Cloud Architecting certified.
 Experience in monorepo architectures and Agile/Scrum environments using Azure DevOps.`,

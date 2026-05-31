@@ -1,15 +1,20 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
-import About from "@/components/sections/About";
-import Experience from "@/components/sections/Experience";
-import Projects from "@/components/sections/Projects";
+import { getPortfolioData } from "@/data/repositories/portfolio.repository";
 
-export default function Home() {
+const About = dynamic(() => import("@/components/sections/About"));
+const Experience = dynamic(() => import("@/components/sections/Experience"));
+const Projects = dynamic(() => import("@/components/sections/Projects"));
+
+export default async function Home() {
+  const data = await getPortfolioData();
+
   return (
     <>
-      <Hero />
-      <About />
-      <Experience />
-      <Projects />
+      <Hero data={data.hero} socialLinks={data.socialLinks} />
+      <About data={data.about} />
+      <Experience data={data.experienceData} />
+      <Projects data={data.projects} />
     </>
   );
 }

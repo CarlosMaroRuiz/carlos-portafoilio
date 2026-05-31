@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, use, useState, type ReactNode } from "react";
 import { es } from "@/lib/translations/es";
 import { en } from "@/lib/translations/en";
 import type { Translation } from "@/lib/translations/types";
@@ -28,7 +28,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
 }
 
 export function useLang(): LangContextValue {
-  const ctx = useContext(LangContext);
+  const ctx = use(LangContext);
   if (!ctx) throw new Error("useLang must be used inside LangProvider");
   return ctx;
 }

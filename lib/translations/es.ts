@@ -14,7 +14,7 @@ export const es: Translation = {
   },
   about: {
     title: "Sobre Mí",
-    bio: `Desarrollador Frontend con más de 2 años de experiencia construyendo aplicaciones web.
+    bio: `Desarrollador Frontend construyendo aplicaciones web.
 Experiencia comprobada entregando interfaces responsivas usando React.js, TypeScript, Tailwind CSS y librerías modernas de componentes UI.
 He trabajado integrando APIs REST, servicios de inteligencia artificial y tecnologías Web3. Certificado en AWS Cloud Architecting.
 Experiencia en arquitecturas multirrepositorio y entornos Agile/Scrum con Azure DevOps.`,

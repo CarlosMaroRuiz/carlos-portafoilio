@@ -1,11 +1,15 @@
 "use client";
 
-import { projects } from "./data";
 import { ProjectCard } from "./ProjectCard";
 import { useLang } from "@/context/LangContext";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { Project } from "@/core/models/portfolio";
 
-export default function Projects() {
+export interface ProjectsProps {
+  data: Project[];
+}
+
+export default function Projects({ data: projects }: ProjectsProps) {
   const { t } = useLang();
 
   return (

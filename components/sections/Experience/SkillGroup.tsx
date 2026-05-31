@@ -1,4 +1,8 @@
-import type { SkillGroupProps } from "./types";
+import { SkillCategory } from "@/core/models/portfolio";
+
+export interface SkillGroupProps {
+  category: SkillCategory;
+}
 
 export function SkillGroup({ category }: SkillGroupProps) {
   return (

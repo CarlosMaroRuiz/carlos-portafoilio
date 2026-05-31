@@ -11,7 +11,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://carlosmarioruiz.com"), // Ajustar al dominio real en el futuro
+  metadataBase: new URL("https://carlosmarioruiz.com"),
   title: {
     default: "Carlos Mario Ruiz Pinacho | Frontend Developer",
     template: "%s | Carlos Mario",
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_MX",
-    url: "https://carlosmarioruiz.com", // Ajustar despues
+    url: "https://carlosmarioruiz.com",
     title: "Carlos Mario Ruiz Pinacho | Frontend Developer",
     description: "Desarrollador Frontend con experiencia en la creación de aplicaciones web escalables e interfaces responsivas.",
     siteName: "Carlos Mario Portfolio",
     images: [
       {
-        url: "/banner2.png", // Next.js lo resolverá si tienes un banner public
+        url: "/banner2.png",
         width: 1200,
         height: 630,
         alt: "Carlos Mario Portfolio Banner",

@@ -2,12 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { hero, socialLinks } from "./data";
+import { motion } from "framer-motion";
 import { SocialBar } from "./SocialBar";
 import { useLang } from "@/context/LangContext";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { HeroData, SocialLink } from "@/core/models/portfolio";
 
-export default function Hero() {
+export interface HeroProps {
+  data: HeroData;
+  socialLinks: SocialLink[];
+}
+
+export default function Hero({ data: hero, socialLinks }: HeroProps) {
   const { t } = useLang();
 
   return (
@@ -59,6 +65,29 @@ export default function Hero() {
       <ScrollReveal direction="right" delay={0.4}>
         <SocialBar links={socialLinks} />
       </ScrollReveal>
+
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5 text-white/30"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.5}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          </svg>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

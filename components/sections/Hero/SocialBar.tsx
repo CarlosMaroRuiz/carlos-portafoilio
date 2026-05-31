@@ -1,4 +1,8 @@
-import type { SocialBarProps } from "./types";
+import { SocialLink } from "@/core/models/portfolio";
+
+export interface SocialBarProps {
+  links: SocialLink[];
+}
 
 const LinkedInIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

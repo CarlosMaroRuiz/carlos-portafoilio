@@ -3,11 +3,17 @@
 import { SkillGroup } from "./SkillGroup";
 import { TimelineItem } from "./TimelineItem";
 import { SideCard } from "./SideCard";
-import { experiences, skillCategories, certifications, awards, education } from "./data";
 import { useLang } from "@/context/LangContext";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { ExperienceData } from "@/core/models/portfolio";
 
-export default function Experience() {
+export interface ExperienceProps {
+  data: ExperienceData;
+}
+
+export default function Experience({
+  data: { experiences, skillCategories, certifications, awards, education },
+}: ExperienceProps) {
   const { t } = useLang();
   const sc = t.experience.skillCategories;
 

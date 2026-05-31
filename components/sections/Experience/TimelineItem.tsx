@@ -1,4 +1,8 @@
-import type { TimelineItemProps } from "./types";
+import { ExperienceItem } from "@/core/models/portfolio";
+
+export interface TimelineItemProps {
+  exp: ExperienceItem;
+}
 
 export function TimelineItem({ exp }: TimelineItemProps) {
   const shortYear = exp.year.split("-")[0].substring(2);
