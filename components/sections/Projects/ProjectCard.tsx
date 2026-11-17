@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
 import { Project } from "@/core/models/portfolio";
 
 export interface ProjectCardProps {
@@ -26,6 +27,7 @@ const isExternalLink = (link: string) =>
   link !== "#" && (link.startsWith("http") || link.includes("."));
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const reduceMotion = useReducedMotion();
   const hasLink = isExternalLink(project.link);
   const href = hasLink
     ? project.link.startsWith("http")
@@ -34,56 +36,55 @@ export function ProjectCard({ project }: ProjectCardProps) {
     : undefined;
 
   const CardContent = (
-    <div className="group relative h-80 bg-zinc-900 overflow-hidden flex items-end p-8 border border-white/5 hover:border-white/20 transition-all duration-500 cursor-pointer">
-      {project.image && (
-        <div className="absolute inset-0 z-0">
+    <motion.article
+      className="group grid h-full overflow-hidden border-b border-white/20 border-dotted py-5 transition-colors hover:bg-white/[0.025] sm:grid-cols-[0.85fr_1.15fr] sm:gap-6"
+      whileHover={reduceMotion ? undefined : { y: -3 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.995 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+    >
+      <div className="relative aspect-[1.1] overflow-hidden border border-white/15 bg-[#151515] sm:aspect-square">
+        {project.image ? (
           <Image
             src={project.image}
             alt={project.title}
             fill
-            className="object-cover opacity-50 group-hover:opacity-70 transition-opacity duration-500 group-hover:scale-105 transition-transform duration-700"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            className="object-cover grayscale transition duration-500 group-hover:grayscale-0 group-hover:scale-[1.03] motion-reduce:transform-none motion-reduce:transition-none"
           />
+        ) : (
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-black/10 via-transparent to-transparent" />
+        )}
+        <div aria-hidden="true" className="project-scan pointer-events-none absolute inset-y-0 -left-1/3 w-1/4 skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+      </div>
+
+      <div className="flex flex-col justify-center py-4 sm:py-2">
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
+            {project.category}
+          </span>
+          {!hasLink && (
+            <span className="shrink-0 border border-white/20 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.1em] text-muted">
+              Private / NDA
+            </span>
+          )}
+          {hasLink && <span className="text-muted"><ExternalLinkIcon /></span>}
         </div>
-      )}
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10 opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
-
-      {!project.image && (
-        <div className="absolute inset-0 opacity-10 group-hover:scale-105 transition-transform duration-700 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
-      )}
-
-      {!hasLink && (
-        <div className="absolute top-4 right-4 z-20 px-2 py-1 bg-white/5 border border-white/10 text-[10px] text-muted uppercase tracking-widest rounded-sm">
-          Private / NDA
-        </div>
-      )}
-
-      {hasLink && (
-        <div className="absolute top-4 right-4 z-20 text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:text-accent">
-          <ExternalLinkIcon />
-        </div>
-      )}
-
-      <div className="relative z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-        <span className="text-accent text-xs font-bold tracking-widest uppercase mb-2 block">
-          {project.category}
-        </span>
-        <h3 className="text-2xl font-bold uppercase tracking-wider mb-2">{project.title}</h3>
-        <p className="text-sm text-muted font-light max-w-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 mb-2">
+        <h3 className="pixel-heading mb-4 text-xl text-foreground sm:text-2xl">{project.title}</h3>
+        <p className="mb-3 text-sm leading-6 text-muted">
           {project.desc}
         </p>
         {project.note && (
-          <p className="text-[10px] text-accent/70 italic opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150 mb-2">
+          <p className="mb-3 text-xs italic leading-5 text-muted">
             * {project.note}
           </p>
         )}
         {hasLink && (
-          <p className="text-xs text-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200 truncate max-w-[200px]">
+          <p className="break-all font-mono text-[10px] uppercase text-muted/80">
             {project.link.replace("https://", "")}
           </p>
         )}
       </div>
-    </div>
+    </motion.article>
   );
 
   if (href) {

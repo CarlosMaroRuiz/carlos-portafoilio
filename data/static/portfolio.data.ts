@@ -115,6 +115,13 @@ export const experienceData: ExperienceData = {
 
 export const projectsData: Project[] = [
   {
+    title: "Monogatari",
+    desc: "Proyecto ganador Hackathon. Plataforma Web3 que combina manga con NFTs y contratos inteligentes.",
+    category: "Web3",
+    link: "#",
+    image: "/projects/Monogatari.gif",
+  },
+  {
     title: "AprendIA",
     desc: "Dashboard administrativo y landing page. Plataforma educativa para personas sordas. (React.js, Angular)",
     category: "Fullstack / EdTech",
@@ -127,13 +134,6 @@ export const projectsData: Project[] = [
     category: "Frontend UI",
     link: "motion-kit-six.vercel.app",
     image: "/projects/motionkit.gif",
-  },
-  {
-    title: "Monogatari",
-    desc: "Proyecto ganador Hackathon. Plataforma Web3 que combina manga con NFTs y contratos inteligentes.",
-    category: "Web3",
-    link: "#",
-    image: "/projects/Monogatari.gif",
   },
   {
     title: "Facturación Centralizada",

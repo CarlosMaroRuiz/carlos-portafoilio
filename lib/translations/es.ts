@@ -36,5 +36,13 @@ Experiencia en arquitecturas multirrepositorio y entornos Agile/Scrum con Azure 
   },
   projects: {
     title: "Portafolio",
+    carousel: "carrusel",
+    slide: "proyecto",
+    of: "de",
+    previous: "Proyecto anterior",
+    next: "Proyecto siguiente",
+    goTo: "Ir al proyecto",
+    pause: "Pausar carrusel",
+    play: "Reanudar carrusel",
   },
 };

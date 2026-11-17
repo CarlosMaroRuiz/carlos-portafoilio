@@ -1,4 +1,5 @@
 import { SocialLink } from "@/core/models/portfolio";
+import { motion, useReducedMotion } from "framer-motion";
 
 export interface SocialBarProps {
   links: SocialLink[];
@@ -25,20 +26,25 @@ const EmailIcon = () => (
 const icons = { linkedin: LinkedInIcon, github: GitHubIcon, email: EmailIcon } as const;
 
 export function SocialBar({ links }: SocialBarProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <div className="absolute bottom-8 left-8 md:left-24 z-10 flex space-x-5 items-center">
+    <div className="flex items-center gap-5">
       {links.map((link) => {
         const Icon = icons[link.icon];
         return (
-          <a
+          <motion.a
             key={link.label}
             href={link.href}
             aria-label={link.label}
             {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            className="text-muted hover:text-accent transition-colors"
+            className="text-muted transition-colors hover:text-foreground"
+            whileHover={reduceMotion ? undefined : { y: -2 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+            transition={{ duration: 0.18 }}
           >
             <Icon />
-          </a>
+          </motion.a>
         );
       })}
     </div>

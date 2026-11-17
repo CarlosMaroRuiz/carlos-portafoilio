@@ -27,56 +27,83 @@ export default function Experience({
   ];
 
   return (
-    <section id="resume" className="min-h-screen w-full bg-[#0a0a0a] px-8 md:px-24 py-24 flex flex-col justify-center">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-8 max-w-7xl w-full mx-auto">
+    <section id="resume" className="w-full px-4 py-12 sm:px-8 sm:py-16 lg:px-12">
+      <div className="mx-auto max-w-7xl border-y border-white/20 border-dotted text-foreground">
+        <div className="px-4 py-12 sm:px-8 sm:py-16 lg:px-12">
+          <ScrollReveal direction="up" delay={0.1}>
+            <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+              {t.experience.sectionTitle}
+            </p>
+            <h2 className="pixel-heading mb-10 max-w-xl text-3xl leading-tight sm:mb-14 sm:text-5xl">
+              {t.experience.experienceTitle}
+            </h2>
+          </ScrollReveal>
 
-        <ScrollReveal direction="up" delay={0.1} className="space-y-10">
-          {translatedCategories.map((cat) => (
-            <SkillGroup key={cat.title} category={cat} />
-          ))}
-        </ScrollReveal>
-
-        <ScrollReveal direction="up" delay={0.2} className="space-y-8 lg:px-8">
-          <h3 className="text-sm font-bold tracking-widest uppercase mb-8 border-b border-white/10 pb-4">
-            {t.experience.experienceTitle}
-          </h3>
-          <div className="relative border-l border-white/20 ml-3 md:ml-4 space-y-12 pb-8">
-            {experiences.map((exp, i) => (
-              <TimelineItem key={i} exp={exp} />
+          <div className="grid gap-x-8 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
+            {translatedCategories.map((cat, index) => (
+              <ScrollReveal key={cat.title} direction="up" delay={0.1 + (index % 3) * 0.08}>
+                <SkillGroup category={cat} />
+              </ScrollReveal>
             ))}
           </div>
-        </ScrollReveal>
+        </div>
 
-        <ScrollReveal direction="up" delay={0.3} className="space-y-12">
-          <SideCard title={t.experience.certTitle}>
-            <div className="space-y-4">
-              {certifications.map((cert) => (
-                <div key={cert.name}>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-white">{cert.name}</h4>
-                  <p className="text-xs text-muted font-light">{cert.issuer}</p>
-                </div>
-              ))}
+        <div className="border-t border-white/20 border-dotted px-4 py-12 sm:px-8 sm:py-16 lg:px-12">
+          <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+            <ScrollReveal direction="up" delay={0.1}>
+              <h3 className="mb-8 font-mono text-sm font-semibold uppercase tracking-[0.1em] sm:text-base">
+                {t.experience.experienceTitle}
+              </h3>
+              <div className="relative ml-3 space-y-10 border-l border-foreground/15 pb-2">
+                {experiences.map((exp, i) => (
+                  <ScrollReveal
+                    key={i}
+                    direction={i % 2 === 0 ? "left" : "right"}
+                    delay={i * 0.08}
+                  >
+                    <TimelineItem exp={exp} />
+                  </ScrollReveal>
+                ))}
+              </div>
+            </ScrollReveal>
+
+            <div className="grid gap-8 sm:grid-cols-2">
+              <ScrollReveal direction="up" delay={0.1}>
+                <SideCard title={t.experience.certTitle}>
+                  <div className="space-y-5">
+                    {certifications.map((cert) => (
+                      <div key={cert.name}>
+                        <h4 className="text-sm font-semibold text-foreground">{cert.name}</h4>
+                        <p className="mt-1 text-sm text-muted">{cert.issuer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </SideCard>
+              </ScrollReveal>
+
+              <ScrollReveal direction="up" delay={0.2}>
+                <SideCard title={t.experience.awardsTitle}>
+                  <ul className="space-y-4 text-sm leading-6 text-muted">
+                    {awards.map((award) => (
+                      <li key={award}>{award}</li>
+                    ))}
+                  </ul>
+                </SideCard>
+              </ScrollReveal>
+
+              <ScrollReveal direction="up" delay={0.3} className="sm:col-span-2">
+                <SideCard title={t.experience.educationTitle}>
+                  <h4 className="text-sm font-semibold text-foreground">{education.degree}</h4>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    {education.school}
+                    <br />
+                    ({education.period})
+                  </p>
+                </SideCard>
+              </ScrollReveal>
             </div>
-          </SideCard>
-
-          <SideCard title={t.experience.awardsTitle}>
-            <ul className="text-xs text-muted font-light space-y-3">
-              {awards.map((award) => (
-                <li key={award}>{award}</li>
-              ))}
-            </ul>
-          </SideCard>
-
-          <SideCard title={t.experience.educationTitle}>
-            <h4 className="text-sm font-bold uppercase tracking-wider">{education.degree}</h4>
-            <p className="text-sm text-muted font-light">
-              {education.school}
-              <br />
-              ({education.period})
-            </p>
-          </SideCard>
-        </ScrollReveal>
-
+          </div>
+        </div>
       </div>
     </section>
   );

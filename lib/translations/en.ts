@@ -36,5 +36,13 @@ Experience in monorepo architectures and Agile/Scrum environments using Azure De
   },
   projects: {
     title: "Portfolio",
+    carousel: "carousel",
+    slide: "project",
+    of: "of",
+    previous: "Previous project",
+    next: "Next project",
+    goTo: "Go to project",
+    pause: "Pause carousel",
+    play: "Resume carousel",
   },
 };

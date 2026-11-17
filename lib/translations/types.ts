@@ -31,5 +31,13 @@ export interface Translation {
   };
   projects: {
     title: string;
+    carousel: string;
+    slide: string;
+    of: string;
+    previous: string;
+    next: string;
+    goTo: string;
+    pause: string;
+    play: string;
   };
 }

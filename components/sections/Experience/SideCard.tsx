@@ -8,7 +8,7 @@ export interface SideCardProps {
 export function SideCard({ title, children }: SideCardProps) {
   return (
     <div>
-      <h3 className="text-sm font-bold tracking-widest uppercase mb-6 border-b border-white/10 pb-4">
+      <h3 className="mb-6 border-b border-white/15 pb-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-foreground">
         {title}
       </h3>
       {children}

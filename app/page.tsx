@@ -12,9 +12,9 @@ export default async function Home() {
   return (
     <>
       <Hero data={data.hero} socialLinks={data.socialLinks} />
-      <About data={data.about} />
-      <Experience data={data.experienceData} />
       <Projects data={data.projects} />
+      <Experience data={data.experienceData} />
+      <About data={data.about} />
     </>
   );
 }
